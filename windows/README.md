@@ -1,50 +1,51 @@
 # Copiale Translator — Windows app
 
-## Which file do I click?
+## Install it (final version, no Python needed)
 
-**Easiest (no Python needed):** download
-`CopialeTranslator-Setup-1.0.0.exe` from
-[Releases](https://github.com/sazid63/Copiale-Translator/releases),
-double-click it, and follow the installer (no admin rights needed). It adds
-a Start Menu entry and an uninstaller. If Windows SmartScreen warns (the
-installer isn't commercially signed), click "More info" → "Run anyway".
+1. Open
+   [Releases](https://github.com/sazid63/Copiale-Translator/releases)
+   and download `CopialeTranslator-Setup-1.0.0.exe`.
+2. Double-click the downloaded file.
+3. Click **Next → Install** (no admin rights needed).
+4. If Windows SmartScreen warns (the installer isn't commercially
+   signed), click **"More info" → "Run anyway"**.
+5. Open **Start Menu → Copiale Translator**.
 
-**From source (needs Python 3.9+):** open this `windows` folder and
-double-click **`Copiale_Translator.bat`** — the translator window opens.
-
-If you downloaded this project as a ZIP from GitHub: unzip it first.
-
-To remove the installed app: Settings → Apps → Copiale Translator →
-Uninstall (or run `unins000.exe` in its install folder).
-
-Clickable desktop translator (same engine as the Python CLI and the
-Android app). Windows only — standard library Tkinter, no installs
-beyond Python 3.9+ itself. No Docker, no Linux, no network.
-
-## Run it
-
-Double-click **`Copiale_Translator.bat`**, or:
-
-```powershell
-cd windows
-python copiale_gui.py
-```
+That is the whole installation process — one file, one installer.
 
 ## Use it
 
 - **Mode dropdown:** Encode (message → tokens) or Decode (tokens → message).
 - **Key field (optional):** leave empty for an open message. Type a
-  passphrase, or press **New key** for a fresh shareable one.
-- **Translate**, then copy the result. To send a secret, share the tokens
-  **AND** the key — the other person pastes both into Decode with the same
-  key. Without the key it reads as gibberish.
+  passphrase, or press **New key** for a fresh shareable one, then
+  **Translate**.
+- **To send a secret:** share the encoded tokens **AND** the key. The other
+  person pastes both into Decode with the same key. Without the key it
+  reads as gibberish.
 - **Strict mode** checkbox: historical symbols only (keys rejected, same
-  rule as the CLI).
+  rule as everywhere else in this project).
 - **Swap** flips the direction; **Clear** empties the fields.
 
-## Notes
+## Uninstall it
 
-- Keys interoperate with the CLI (`python -m copiale.cli ... --key`)
-  and the Android app — one derivation (`Copiale-Lock-v2`) everywhere.
-- The key is a casual-privacy convenience, not audited cryptography.
-- `ß` normalises to `ss`, as everywhere else in this project.
+Settings → Apps → Copiale Translator → Uninstall. Removes everything.
+
+## For developers (rebuild from source)
+
+The installer packages `copiale_gui.py` (same engine as the CLI and the
+Android app — one `Copiale-Lock-v2` key derivation everywhere):
+
+```powershell
+# 1. build a single-file exe (needs: pip install pyinstaller)
+python -m PyInstaller --noconfirm --onefile --windowed `
+  --name CopialeTranslator --icon windows/icon.ico --paths . `
+  --distpath windows/dist --workpath windows/build `
+  windows/copiale_gui.py
+
+# 2. compile the installer (needs Inno Setup 6)
+iscc windows/installer.iss
+# → windows/Output/CopialeTranslator-Setup-1.0.0.exe
+```
+
+Build outputs (`dist/`, `build/`, `Output/`) are gitignored; finished
+installers ship via GitHub Releases, never in git.

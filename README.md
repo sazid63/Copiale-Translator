@@ -14,15 +14,11 @@ Standard library only. Python 3.9+.
 download `app-release.apk`, open it on your phone. Allow "unknown sources"
 once when asked, then install. The app icon is "Copiale Translator".
 
-**Windows PC — easiest (no Python needed):** download
+**Windows PC (no Python needed):** download
 `CopialeTranslator-Setup-1.0.0.exe` from
 [Releases](https://github.com/sazid63/Copiale-Translator/releases),
-double-click it, and follow the installer (no admin rights needed).
-
-**Windows PC — from source (needs Python 3.9+):** either `git clone` this
-repo or download it as a ZIP from GitHub (Code → Download ZIP) and unzip
-it. Then open the `windows` folder and **double-click
-`Copiale_Translator.bat`** — the translator window opens.
+double-click it, click Next → Install (no admin rights needed), then open
+Start Menu → Copiale Translator. Full steps in `windows/README.md`.
 
 ## Quick start
 

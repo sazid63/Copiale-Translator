@@ -1,0 +1,341 @@
+{
+ "derivation": "Copiale-Lock-v2",
+ "alphabet": "abcdefghijklmnopqrstuvwxyz\u00e4\u00f6\u00fc",
+ "permutations": [
+  {
+   "key": "test-key-123",
+   "permutation": "m\u00f6ubxrwdsgl\u00e4vetyopnjia\u00fcczkfqh"
+  },
+  {
+   "key": "my-secret-key",
+   "permutation": "abfy\u00fclsm\u00f6tczgxuvnrq\u00e4dhwjiepko"
+  },
+  {
+   "key": "a",
+   "permutation": "v\u00fcsotjzghkpfwiru\u00f6lynqdxc\u00e4ebma"
+  },
+  {
+   "key": "Z",
+   "permutation": "mbcifgjkx\u00e4y\u00fcdsenlqr\u00f6vuotzpawh"
+  },
+  {
+   "key": "correct horse battery staple",
+   "permutation": "qfdkasrtzjpglxhiyvcmnoue\u00f6\u00e4\u00fcwb"
+  },
+  {
+   "key": "schl\u00fcssel \ud83d\udd11",
+   "permutation": "myvj\u00e4finakbur\u00f6etwdxcpqls\u00fcgzho"
+  }
+ ],
+ "locked": [
+  {
+   "key": "my-secret-key",
+   "plaintext": "meet at midnight",
+   "tokens": [
+    "del",
+    "grl",
+    "grl",
+    "fem",
+    "a",
+    "p.",
+    "fem",
+    "b",
+    "x.",
+    "no",
+    "inf",
+    "pipe",
+    "no",
+    "bar",
+    "plus",
+    "fem"
+   ],
+   "decoded": "meet at midnight"
+  },
+  {
+   "key": "test-key-123",
+   "plaintext": "the secret master of the lodge",
+   "tokens": [
+    "car",
+    "pi",
+    "pipe",
+    "a",
+    "mu",
+    "pipe",
+    "ni",
+    "d",
+    "pipe",
+    "car",
+    "b",
+    "mal",
+    "plus",
+    "ru",
+    "car",
+    "pipe",
+    "d",
+    "c",
+    "lam",
+    "r.",
+    "e",
+    "car",
+    "z",
+    "pipe",
+    "f",
+    "fem",
+    "lam",
+    "sqp",
+    "m.",
+    "pipe"
+   ],
+   "decoded": "the secret master of the lodge"
+  },
+  {
+   "key": "test-key-123",
+   "plaintext": "hello world",
+   "tokens": [
+    "pi",
+    "pipe",
+    "fem",
+    "fem",
+    "lam",
+    "a",
+    "grl",
+    "lam",
+    "d",
+    "fem",
+    "sqp"
+   ],
+   "decoded": "hello world"
+  },
+  {
+   "key": "correct horse battery staple",
+   "plaintext": "bitter alle sonne mutter",
+   "tokens": [
+    "sqi",
+    "s.",
+    "plus",
+    ":",
+    "p.",
+    "mal",
+    "a",
+    "qua",
+    "del",
+    ":",
+    "n.",
+    "b",
+    "arr",
+    "pipe",
+    ":",
+    "h.",
+    "c",
+    "c.",
+    "mu",
+    "plus",
+    ":",
+    "p.",
+    "mal"
+   ],
+   "decoded": "bitter alle sonne mutter"
+  },
+  {
+   "key": "Z",
+   "plaintext": "add 2 and 3",
+   "tokens": [
+    "plus",
+    "y..",
+    "ns",
+    "a",
+    "d",
+    "tri",
+    "sqi",
+    "pipe",
+    "b",
+    "plus",
+    "bar",
+    "iot",
+    "c",
+    "y..",
+    "qua",
+    "sqi",
+    "pipe"
+   ],
+   "decoded": "add zwei and drei"
+  },
+  {
+   "key": "a",
+   "plaintext": "stra\u00dfe gr\u00fc\u00dfe",
+   "tokens": [
+    "inf",
+    "mu",
+    "c.",
+    "mal",
+    "inf",
+    ":",
+    "lam",
+    "a",
+    "s.",
+    "c.",
+    "p.",
+    "inf",
+    ":",
+    "lam"
+   ],
+   "decoded": "strasse gr\u00fcsse"
+  },
+  {
+   "key": "schl\u00fcssel \ud83d\udd11",
+   "plaintext": "ready? go!",
+   "tokens": [
+    "pi",
+    "fem",
+    "plus",
+    "car",
+    "grl",
+    "?",
+    "a",
+    "y..",
+    "ah",
+    "!"
+   ],
+   "decoded": "ready? go!"
+  }
+ ],
+ "plain": [
+  {
+   "plaintext": "ok",
+   "tokens": [
+    "tri",
+    "gam"
+   ],
+   "decoded": "ok"
+  },
+  {
+   "plaintext": "hello world",
+   "tokens": [
+    "hd",
+    "ah",
+    "c.",
+    ":",
+    "tri",
+    "a",
+    "m.",
+    "o.",
+    "r.",
+    "c.",
+    "pi"
+   ],
+   "decoded": "hello world"
+  },
+  {
+   "plaintext": "schule",
+   "tokens": [
+    "cross",
+    "ni",
+    "c.",
+    "ah"
+   ],
+   "decoded": "schule"
+  },
+  {
+   "plaintext": "the quick brown fox jumps over the lazy dog",
+   "tokens": [
+    "lam",
+    "hd",
+    "ah",
+    "a",
+    "qua",
+    "ni",
+    "y..",
+    "bas",
+    "gam",
+    "b",
+    "sqp",
+    "r.",
+    "tri",
+    "m.",
+    "mu",
+    "c",
+    "sqi",
+    "o.",
+    "pipe",
+    "e",
+    "car",
+    "ki",
+    "plus",
+    "d",
+    "bar",
+    "f",
+    "tri",
+    "mal",
+    "eh",
+    "three",
+    "h",
+    "lam",
+    "hd",
+    "ih",
+    "i",
+    "c.",
+    "p.",
+    "s.",
+    "inf",
+    "k",
+    "pi",
+    "o.",
+    "del"
+   ],
+   "decoded": "the quick brown fox jumps over the lazy dog"
+  },
+  {
+   "plaintext": "add 2 and 3",
+   "tokens": [
+    "p.",
+    "pi",
+    ":",
+    "a",
+    "s.",
+    "m.",
+    "ah",
+    "y..",
+    "b",
+    "n.",
+    "mu",
+    "pi",
+    "c",
+    "z",
+    "r.",
+    "eh",
+    "ns"
+   ],
+   "decoded": "add zwei and drei"
+  },
+  {
+   "plaintext": "the oculist opens the book",
+   "tokens": [
+    "lam",
+    "hd",
+    "ah",
+    "a",
+    "tri",
+    "bas",
+    "ni",
+    "c.",
+    "y..",
+    "hk",
+    "b",
+    "o.",
+    "d",
+    "uu",
+    "bar",
+    "c",
+    "lam",
+    "hd",
+    "eh",
+    "e",
+    "sqp",
+    "tri",
+    "o.",
+    "gam"
+   ],
+   "decoded": "the oculist opens the book"
+  }
+ ]
+}

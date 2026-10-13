@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sazid63.copiale">
+    <!-- Flutter needs it to communicate with the running engine. Profile only. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

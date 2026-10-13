@@ -12,6 +12,14 @@ Because the substitution happens at the letter level, the emitted tokens are
 still ordinary historical cipher tokens. Decoding the same tokens *without*
 the key yields the substituted (unreadable) text instead of the message.
 
+Derivation ("Copiale-Lock-v2", portable across languages): the permutation of
+the 29-letter alphabet is produced by a Fisher-Yates shuffle driven by a
+SHA-256 counter stream. Block c = SHA256(b"Copiale-Lock-v2" + b"\\x00" +
+key_utf8 + counter_be32), consumed as consecutive big-endian uint32 words;
+each position i (n-1 down to 1) takes j = randbelow(i+1) with rejection
+sampling (k = bit_length(limit-1) top bits of the next word). Any language
+with SHA-256 can reproduce it exactly — this is what the mobile app does.
+
 ß is normalised to "ss" before substitution (the same documented rule as
 unlocked mode); everything else round-trips exactly.
 
@@ -20,16 +28,18 @@ in spec/extensions.md. Rejected in strict mode.
 """
 from __future__ import annotations
 import hashlib
-import random
 import re
 import secrets
 import string
 
-# Letters covered by the substitution (the encoder's letter alphabet minus
-# ß: a ß encodes to a token that decodes as TWO characters ("ss"), so it can
-# never survive a character-level inverse. Locked mode normalises ß to "ss"
-# first — exactly the documented historical rule — and substitutes the rest.
+# Letters covered by the substitution. ß is excluded: a ß encodes to a token
+# that decodes as TWO characters ("ss"), so it can never survive a
+# character-level inverse. Locked mode normalises ß to "ss" first — exactly
+# the documented historical rule.
 ALPHABET = "abcdefghijklmnopqrstuvwxyzäöü"
+
+# Derivation version tag (domain separation). Bump if the derivation changes.
+DERIVATION = "Copiale-Lock-v2"
 
 _KEYGEN_ALPHABET = string.ascii_letters + string.digits
 DEFAULT_KEY_LENGTH = 16
@@ -44,16 +54,34 @@ def validate_key(key):
     return key
 
 
-def _seed(key):
-    return int.from_bytes(hashlib.sha256(key.encode("utf-8")).digest(), "big")
+def _words(key):
+    """Infinite stream of uint32 words (big-endian) from the SHA-256 counter
+    stream. Portable: any SHA-256 implementation reproduces it."""
+    kb = validate_key(key).encode("utf-8")
+    counter = 0
+    while True:
+        block = hashlib.sha256(
+            DERIVATION.encode("ascii") + b"\x00" + kb
+            + counter.to_bytes(4, "big")
+        ).digest()
+        for i in range(0, 32, 4):
+            yield int.from_bytes(block[i:i + 4], "big")
+        counter += 1
 
 
 def permutation(key):
     """Deterministic permutation of ALPHABET derived from key."""
     validate_key(key)
-    rng = random.Random(_seed(key))
     perm = list(ALPHABET)
-    rng.shuffle(perm)
+    stream = _words(key)
+    for i in range(len(perm) - 1, 0, -1):
+        limit = i + 1
+        k = (limit - 1).bit_length()
+        while True:
+            cand = next(stream) >> (32 - k)
+            if cand < limit:
+                break
+        perm[i], perm[cand] = perm[cand], perm[i]
     return "".join(perm)
 
 

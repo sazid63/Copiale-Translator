@@ -10,3 +10,19 @@ venv/
 *.log
 .DS_Store
 Thumbs.db
+
+# Flutter / Android build outputs and machine-local files
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/app/build/
+
+# Release signing MUST stay on the release machine, never in git
+mobile/android/key.properties
+*.jks
+*.keystore
+*.apk
+*.aab

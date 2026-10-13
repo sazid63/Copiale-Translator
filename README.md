@@ -77,6 +77,8 @@ Without the key (or with the wrong key) the same tokens decode to
 substituted gibberish, not the message. Keys are case-sensitive, rejected in
 `--strict` mode, and are a casual-privacy convenience — not audited
 cryptography. `ß` normalises to `ss`, as in unlocked mode.
+Locked derivation: `Copiale-Lock-v2` (portable across the Python translator
+and the mobile app, so keys interoperate).
 
 ## Examples
 

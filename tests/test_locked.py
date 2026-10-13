@@ -84,6 +84,28 @@ class TestLockedSecrecy(unittest.TestCase):
         self.assertEqual(decode(["star"], key=KEY)["text"], "*star*")
 
 
+class TestLockedDerivation(unittest.TestCase):
+    """Pinned "Copiale-Lock-v2" vectors: any port (e.g. the mobile app) must
+    reproduce these exactly, or keys will not interoperate."""
+
+    def test_pinned_permutations(self):
+        self.assertEqual(
+            L.permutation("test-key-123"),
+            "m\xf6ubxrwdsgl\xe4vetyopnjia\xfcczkfqh")
+        self.assertEqual(
+            L.permutation("my-secret-key"),
+            "abfy\xfclsm\xf6tczgxuvnrq\xe4dhwjiepko")
+
+    def test_pinned_locked_encode(self):
+        toks = encode("meet at midnight", key="my-secret-key")["tokens"]
+        self.assertEqual(
+            toks,
+            ["del", "grl", "grl", "fem", "a", "p.", "fem", "b", "x.",
+             "no", "inf", "pipe", "no", "bar", "plus", "fem"])
+        self.assertEqual(decode(toks, key="my-secret-key")["text"],
+                         "meet at midnight")
+
+
 class TestLockedModes(unittest.TestCase):
     def test_strict_rejects_key(self):
         with self.assertRaises(CopialeError):

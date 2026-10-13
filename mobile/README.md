@@ -58,7 +58,9 @@ flutter build apk --release                 # sideloadable APK
 flutter build appbundle --release           # Play Store upload (.aab)
 ```
 
-Requires Flutter 3.x (Dart >=3.0), Java 17, Android SDK with API 35.
+Requires Flutter 3.x (Dart >=3.0), a JDK 17+ (Android Studio's bundled
+runtime works, or set `JAVA_HOME`), and the Android SDK with the API level
+`flutter doctor` asks for.
 First Gradle build downloads its distribution automatically via the
 committed wrapper (`android/gradle/wrapper/`).
 

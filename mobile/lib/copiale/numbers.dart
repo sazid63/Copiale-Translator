@@ -35,7 +35,7 @@ String _below1000(int n) {
   final r = n % 100;
   final parts = <String>[];
   if (h != 0) {
-    parts.add((h == 1 ? 'ein' : _ones[h]) + 'hundert');
+    parts.add('${h == 1 ? 'ein' : _ones[h]}hundert');
   }
   if (r != 0) {
     parts.add(_below100(r));

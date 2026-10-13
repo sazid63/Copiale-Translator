@@ -85,7 +85,7 @@ class _CipherScreenState extends State<CipherScreen> {
   }
 
   Future<void> _paste(TextEditingController c) async {
-    final data = await Clipboard.getData(Clipboard.kPlainText);
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
     if (data?.text != null) {
       c.text = data!.text!;
       if (mounted) {
@@ -256,7 +256,7 @@ class _CipherScreenState extends State<CipherScreen> {
             decoration: BoxDecoration(
               color: NightSignals.surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: NightSignals.danger.withOpacity(0.6)),
+              border: Border.all(color: NightSignals.danger.withValues(alpha: 0.6)),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,7 +282,7 @@ class _CipherScreenState extends State<CipherScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                   color: _effectiveKey != null
-                      ? NightSignals.amber.withOpacity(0.6)
+                      ? NightSignals.amber.withValues(alpha: 0.6)
                       : NightSignals.primaryDim),
             ),
             child: Column(

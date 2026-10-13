@@ -255,8 +255,8 @@ EncodeResult encode(String text,
   if (unsupported.isNotEmpty) {
     final uniq = unsupported.toSet().toList()..sort();
     throw CopialeError(
-        'unsupported input characters (nothing was silently altered): ' +
-            uniq.map((c) => "'$c'").join(', '));
+        'unsupported input characters (nothing was silently altered): '
+        "${uniq.map((c) => "'$c'").join(', ')}");
   }
 
   return EncodeResult(

@@ -17,7 +17,7 @@ class CopialeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = ColorScheme.dark(
+    const scheme = ColorScheme.dark(
       primary: NightSignals.primary,
       secondary: NightSignals.amber,
       surface: NightSignals.surface,

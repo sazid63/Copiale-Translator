@@ -26,3 +26,6 @@ mobile/android/key.properties
 *.keystore
 *.apk
 *.aab
+
+# Flutter-generated plugin registrant (regenerated every build)
+mobile/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.*

@@ -7,6 +7,19 @@ supported behavior clearly separate from modern extensions.
 
 Standard library only. Python 3.9+.
 
+## Get the app (no building needed)
+
+**Android phone:** open
+[Releases](https://github.com/sazid63/Copiale-Translator/releases),
+download `app-release.apk`, open it on your phone. Allow "unknown sources"
+once when asked, then install. The app icon is "Copiale Translator".
+
+**Windows PC:** you need Python 3.9+ installed (from python.org). Then either
+`git clone` this repo or download it as a ZIP from GitHub
+(Code → Download ZIP) and unzip it. Then open the `windows` folder and
+**double-click `Copiale_Translator.bat`** — the translator window opens.
+No install step, nothing else to click.
+
 ## Quick start
 
 ```powershell

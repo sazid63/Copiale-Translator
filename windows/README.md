@@ -1,5 +1,16 @@
 # Copiale Translator — Windows app
 
+## Which file do I click?
+
+**`Copiale_Translator.bat`** — double-click it and the translator window
+opens. That is the only file you ever need to click.
+
+Requirements: Python 3.9+ installed (one time, from python.org — tick
+"Add python.exe to PATH" during its setup). No other installs.
+
+If you downloaded this project as a ZIP from GitHub: unzip it first, then
+open the `windows` folder and double-click `Copiale_Translator.bat`.
+
 Clickable desktop translator (same engine as the Python CLI and the
 Android app). Windows only — standard library Tkinter, no installs
 beyond Python 3.9+ itself. No Docker, no Linux, no network.

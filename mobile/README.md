@@ -1,5 +1,12 @@
 # Copiale Translator — Android app
 
+## Install it (no building needed)
+
+Open
+[Releases](https://github.com/sazid63/Copiale-Translator/releases) on your
+phone, download `app-release.apk`, open the file, allow "unknown sources"
+once, and install. The app works fully offline.
+
 Flutter port of the Copiale cipher translator (`../copiale/`), with the
 optional shared-key locked mode. Works **fully offline** — no permissions,
 no network, no accounts.

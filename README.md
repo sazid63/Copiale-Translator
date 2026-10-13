@@ -49,6 +49,35 @@ tests/
 
 Unsupported input always raises an error; it is never dropped quietly.
 
+---
+
+## Locked (keyed) mode — optional (modern extension, never historical)
+
+No key needed for normal use. When two people need privacy, the sender locks
+the message with a passphrase:
+
+```powershell
+# 1. make a key (or pick your own passphrase)
+python -m copiale.cli keygen
+
+# 2. lock a message (share the printed tokens AND the key)
+python -m copiale.cli encode "meet at midnight" --key "my-secret-key"
+
+# 3. recipient unlocks with the same key
+python -m copiale.cli decode "<tokens>" --key "my-secret-key"
+```
+
+Or in one step (the encoder gives you a fresh key to share):
+
+```powershell
+python -m copiale.cli encode "meet at midnight" --new-key
+```
+
+Without the key (or with the wrong key) the same tokens decode to
+substituted gibberish, not the message. Keys are case-sensitive, rejected in
+`--strict` mode, and are a casual-privacy convenience — not audited
+cryptography. `ß` normalises to `ss`, as in unlocked mode.
+
 ## Examples
 
 ```powershell

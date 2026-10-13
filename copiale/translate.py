@@ -15,6 +15,7 @@ from __future__ import annotations
 import re
 from . import key as K
 from . import numbers as N
+from . import locked as L
 
 
 class CopialeError(Exception):
@@ -80,16 +81,24 @@ def _encode_word(word, counters, use_colon, unsupported):
 
 
 def encode(text, *, mode="experimental", spell_numbers=True,
-           number_lang="de", use_colon=True):
+           number_lang="de", use_colon=True, key=None):
     """
     Returns dict(
         tokens=[...], text=normalized plaintext used, extensions=[...],
-        unsupported=[...], notes=[...]
+        unsupported=[...], notes=[...], locked=bool
     )
     Raises CopialeError if unsupported input is present.
+    key: optional user passphrase (modern extension E6). When given, letters
+    are substituted before enciphering; the recipient must decode with the
+    same key. Rejected in strict mode. None (default) keeps historical
+    behaviour exactly.
     """
     if mode not in ("strict", "experimental"):
         raise ValueError("mode must be 'strict' or 'experimental'")
+    if key is not None and (not isinstance(key, str) or not key.strip()):
+        raise CopialeError("key must be a non-empty string")
+    if key is not None and mode == "strict":
+        raise CopialeError("keys are a modern extension, rejected in strict mode")
 
     notes = []
     extensions = []
@@ -113,6 +122,16 @@ def encode(text, *, mode="experimental", spell_numbers=True,
         if mode == "strict":
             unsupported.extend(sorted(set(re.findall(r"\d", s))))
             notes.append("digits are not part of the historical cipher")
+
+    if key is not None:
+        # Applied after number spelling so spelled-out number words are
+        # covered by the substitution as well (no plaintext leak).
+        # ß is normalised to "ss" first: a ß encodes to a token that
+        # decodes as two characters, which no character-level inverse can
+        # undo. This is the same documented rule as unlocked mode.
+        s = s.replace("ß", "ss")
+        s = L.apply(s, key)
+        extensions.append("locked-key")
 
     counters = {}
     tokens = []
@@ -180,6 +199,7 @@ def encode(text, *, mode="experimental", spell_numbers=True,
         "extensions": sorted(set(extensions)),
         "unsupported": [],
         "notes": notes,
+        "locked": key is not None,
     }
 
 
@@ -190,14 +210,21 @@ def render(tokens):
 # ---------------------------------------------------------------------------
 # Decoding
 # ---------------------------------------------------------------------------
-def decode(tokens, *, mode="experimental"):
+def decode(tokens, *, mode="experimental", key=None):
     """
     tokens: list of cipher tokens (or a whitespace-separated string).
     Returns dict(text=..., notes=[...], extensions=[...], ambiguous=[...],
-                 unknown=[...])
+                 unknown=[...], locked=bool)
+    key: optional user passphrase (modern extension E6); must be the same
+    key used at encode time. Decoding locked tokens without (or with the
+    wrong) key yields the substituted text, not the message.
     """
     if isinstance(tokens, str):
         tokens = tokens.split()
+    if key is not None and (not isinstance(key, str) or not key.strip()):
+        raise CopialeError("key must be a non-empty string")
+    if key is not None and mode == "strict":
+        raise CopialeError("keys are a modern extension, rejected in strict mode")
 
     out = []
     notes = []
@@ -231,10 +258,14 @@ def decode(tokens, *, mode="experimental"):
     text = "".join(out)
     # collapse runs of spaces introduced by NULL tokens
     text = re.sub(r"  +", " ", text)
+    if key is not None:
+        text = L.unapply(text, key)
+        extensions.append("locked-key")
     return {
         "text": text,
         "notes": notes,
         "extensions": sorted(set(extensions)),
         "ambiguous": ambiguous,
         "unknown": unknown,
+        "locked": key is not None,
     }

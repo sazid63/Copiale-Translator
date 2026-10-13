@@ -34,4 +34,4 @@ mobile/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.*
 windows/dist/
 windows/build/
 windows/Output/
-windows/*.spec
+*.spec

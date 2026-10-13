@@ -2,14 +2,20 @@
 
 ## Which file do I click?
 
-**`Copiale_Translator.bat`** — double-click it and the translator window
-opens. That is the only file you ever need to click.
+**Easiest (no Python needed):** download
+`CopialeTranslator-Setup-1.0.0.exe` from
+[Releases](https://github.com/sazid63/Copiale-Translator/releases),
+double-click it, and follow the installer (no admin rights needed). It adds
+a Start Menu entry and an uninstaller. If Windows SmartScreen warns (the
+installer isn't commercially signed), click "More info" → "Run anyway".
 
-Requirements: Python 3.9+ installed (one time, from python.org — tick
-"Add python.exe to PATH" during its setup). No other installs.
+**From source (needs Python 3.9+):** open this `windows` folder and
+double-click **`Copiale_Translator.bat`** — the translator window opens.
 
-If you downloaded this project as a ZIP from GitHub: unzip it first, then
-open the `windows` folder and double-click `Copiale_Translator.bat`.
+If you downloaded this project as a ZIP from GitHub: unzip it first.
+
+To remove the installed app: Settings → Apps → Copiale Translator →
+Uninstall (or run `unins000.exe` in its install folder).
 
 Clickable desktop translator (same engine as the Python CLI and the
 Android app). Windows only — standard library Tkinter, no installs

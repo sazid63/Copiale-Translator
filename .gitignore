@@ -29,3 +29,9 @@ mobile/android/key.properties
 
 # Flutter-generated plugin registrant (regenerated every build)
 mobile/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.*
+
+# PyInstaller / Inno Setup build outputs (binaries ship via Releases)
+windows/dist/
+windows/build/
+windows/Output/
+windows/*.spec
